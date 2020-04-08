@@ -4,39 +4,24 @@ A package for combining multiple partitions into a consolidated clustering. The 
 Installation
 ------------
 
-Cluster_Ensembles is written in Python and in C. You need Python 2.7, its Standard Library and the following packages:
-* numexpr (version 2.4.0 or later)
-* NumPy (version 1.9.0 or any ulterior version)
-* psutil
-* SciPy
-* scikit-learn
-* setuptools
-* PyTables
+Cluster_Ensembles is written in Python and in C. The original package was written for Python 2.7, but this version was configured to run on MacOS using Python 3.7.
 
-The ```pip install Cluster_Ensembles``` command mentioned below should automatically detect and, if applicable, install or update any of the afore-mentioned dependencies.
+An important prerequisite is having gpmetis installed.
+This code was tested using version metis-5.1.0 downloaded from http://glaros.dtc.umn.edu/gkhome/metis/metis/download
+Once the package is downloaded run
+```
+gunzip metis-5.x.y.tar.gz
+tar -xvf metis-5.x.y.tar
+```
+then navigate into the metis directory and run
+```
+make config
+make
+```
 
-As yet another prelimiary to running Cluster_Ensembles, you should also follow the few more instructions below.
+this will build the package.
+For Cluster_Ensembles to find gpmetis in my PATH I had to copy gpmetis from metis-5.1.0/build/Darwin-x86_64/programs to /usr/local/bin
 
-On CentOS, Fedora or some Red Hat Linux distribution:
-* open a terminal console;
-* type in: ```sudo dnf install glibc.i686```.
-
-This will install the GNU C library that is required to run a 32-bit executable binary with a 64-bit Linux kernel. This executable is tasked with hyper-graph partitioning. Skipping this step would result in a ```bad ELF interpreter``` error message when subsequently trying to run the Cluster_Ensembles package.
-
-On a Debian or Ubuntu platform, the following commands should yield the same outcome:
-* open a terminal console;
-* type in: ```sudo dpkg --add-architecture i386``` to add support for the i386 architecture;
-* enter: ```sudo apt-get install libc6:i386```.
-
-Upon completion of the steps outlined above, install Cluster_Ensembles by sending a request to the Python Package Index (PyPI) as follows:
-* open a terminal console;
-* enter ```pip install Cluster_Ensembles```.
-
-Any missing third-party dependency should be automatically resolved. 
-Please note that as part of the installation of this package, some code written in C that will later on be required by the Cluster_Ensembles package to determine a graph partition is automatically compiled under the hood and according to the specifications of your machine. 
-You therefore need to ensure availability of ```CMake``` and ```GNU make``` on your operating system.
-
-At any rate, to make sure that third-party dependecy software was automatically installed open a terminal window and type, for example, ```gpmetis -help```. If you don't get a help screen, please manually install [METIS - Serial Graph Partitioning and Fill-reducing Matrix Ordering] (http://glaros.dtc.umn.edu/gkhome/metis/metis/overview). On Ubuntu run the command ```sudo apt-get install metis```.
 
 Usage
 -----
